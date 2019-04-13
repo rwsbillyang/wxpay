@@ -1,6 +1,19 @@
 # wxpay
-Wechat(WeiXin) pay sdk
+Wechat(WeiXin) pay sdk, 根据早期的官方sdk代码重构而来
 
+打包安装:
+```
+mvn package install
+```
+
+在项目中引入：
+```
+	<dependency>
+		<groupId>com.github.rwsbillyang</groupId>
+		<artifactId>wxpay</artifactId>
+		<version>1.0</version>
+	</dependency>
+```
 
 使用参考：
 ```
