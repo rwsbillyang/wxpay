@@ -126,7 +126,7 @@ WXPayManager.getInstance().initConfigure(payConfig);//调用SDK中的API将配�
 			log.error("invalid signature");
 			//省略处理代码
 		}
-		```
+		
 		if (resData.getResult_code().equals(ResponseMap.SUCCESS)) {
             //--------------------------------------------------------------------
             //1)预支付成功
@@ -145,3 +145,4 @@ WXPayManager.getInstance().initConfigure(payConfig);//调用SDK中的API将配�
         	//省略处理代码
         }
 
+```
