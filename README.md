@@ -1,7 +1,12 @@
 # wxpay
 Wechat(WeiXin) pay sdk, 根据早期的官方sdk代码重构而来
 
-打包安装:
+#### 引入依赖
+两种方式二选一
+
+- 本地编译安装
+
+git pull 后，本地打包安装:
 ```
 mvn package install
 ```
@@ -15,7 +20,43 @@ mvn package install
 	</dependency>
 ```
 
-使用参考：
+- 直接导入依赖
+
+gradle工程：
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+```
+dependencies {
+		implementation 'com.github.rwsbillyang:wxpay:1.0'
+	}
+```
+
+
+maven工程：
+```
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+```
+
+```
+	<dependency>
+		<groupId>com.github.rwsbillyang</groupId>
+		<artifactId>wxpay</artifactId>
+		<version>1.0</version>
+	</dependency>
+```
+
+#### 使用参考
 ```
 	//首先实现支付配置接口
 	class WxPayConfigBean implements PayConfigBeanInterface{
@@ -146,3 +187,5 @@ WXPayManager.getInstance().initConfigure(payConfig);//调用SDK中的API将配�
         }
 
 ```
+API支持传入HttpRequest参数，以支持多域名多站点。
+
