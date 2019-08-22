@@ -1,13 +1,5 @@
 /**  
-* @Copyright  www.redwolf-soft.com Inc.  All rights reserved. 
-* This software is the confidential and proprietary   
-* information of RedWolf Software.   
-* ("Confidential Information"). You shall not disclose   
-* such Confidential Information and shall use it only  
-* in accordance with the terms of the contract agreement   
-* you entered into with  RedWolf Software.  
-
-* http://www.redwolf-soft.com
+* @Copyright  http://www.apache.org/licenses/LICENSE-2.0.html
 
 * @author:ycg<billyang@redwolf-soft.com>,24272238@qq.com
 * Create date: 2 Apr, 2016 11:23:38 pm
@@ -23,22 +15,43 @@ import com.github.rwsbillyang.wxpay.common.Signature;
 import com.github.rwsbillyang.wxpay.payconfig.WxPayConfigsCache;
 
 
-public abstract class BaseReqData extends HashMap<String,Object>{
-
-
-	
+public abstract class BaseReqData extends HashMap<String,Object>{	
     public abstract int getTypeIndex();
-
-
-
-	public BaseReqData() {
+    
+    private boolean isTransfer = false;
+	private String APPID = "appid"; 
+	private String MCHID = "mch_id"; 
+    public BaseReqData() {
 		super();
+	}
+    /**
+     * 是否是企业付款，因为其字段不同
+     * https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2
+     * */
+	public boolean isTransfer() {
+		return isTransfer;
+	}
+
+	/**
+     * 企业付款时，mch_appid代替appid，mchid代替mch_id
+     * */
+	public void setTransfer(boolean isTransfer) {
+		this.isTransfer = isTransfer;
+		if(isTransfer)
+		{
+			APPID = "mch_appid";
+			MCHID = "mchid";
+		}else
+		{
+			APPID = "appid"; 
+			MCHID = "mch_id"; 
+		}
 	}
 
     public void generateSign()
     {
-    	this.put("appid", WxPayConfigsCache.getAppId());
-    	this.put("mch_id", WxPayConfigsCache.getMchId());
+    	this.put(APPID, WxPayConfigsCache.getAppId());
+    	this.put(MCHID, WxPayConfigsCache.getMchId());
     	this.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
 		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey())) ;
     }
@@ -48,30 +61,30 @@ public abstract class BaseReqData extends HashMap<String,Object>{
 	 * */
     public void generateSign(Integer indexKey)
     {
-    	this.put("appid", WxPayConfigsCache.getAppId(indexKey));
-    	this.put("mch_id", WxPayConfigsCache.getMchId(indexKey));
+    	this.put(APPID, WxPayConfigsCache.getAppId(indexKey));
+    	this.put(MCHID, WxPayConfigsCache.getMchId(indexKey));
     	this.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
 		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(indexKey))) ;
     }
-  
+
 
 	public String getAppid() {
-		return (String) this.get("appid");
+		return (String) this.get(APPID);
 	}
 
 
 	public void setAppid(String appid) {
-		this.put("appid", appid);
+		this.put(APPID, appid);
 	}
 
 
 	public String getMch_id() {
-		return (String) this.get("mch_id");
+		return (String) this.get(MCHID);
 	}
 
 
 	public void setMch_id(String mch_id) {
-		this.put("mch_id", mch_id);
+		this.put(MCHID, mch_id);
 	}
 
 

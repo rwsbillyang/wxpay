@@ -21,7 +21,9 @@ public class TransferReqData  extends BaseReqData{
 	public TransferReqData(String partner_trade_no, String openid,
 			String spbill_create_ip, int amount,String desc,int nameCheck,String realname) {
 		super();
-
+		
+		setTransfer(true);
+		
 		this.put("partner_trade_no", partner_trade_no);
 		this.put("openid", openid);
 		
