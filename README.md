@@ -16,7 +16,7 @@ mvn package install
 	<dependency>
 		<groupId>com.github.rwsbillyang</groupId>
 		<artifactId>wxpay</artifactId>
-		<version>1.0</version>
+		<version>1.0.1</version>
 	</dependency>
 ```
 
@@ -33,7 +33,7 @@ gradle工程：
 ```
 ```
 dependencies {
-		implementation 'com.github.rwsbillyang:wxpay:1.0'
+		implementation 'com.github.rwsbillyang:wxpay:1.0.1'
 	}
 ```
 
