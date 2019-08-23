@@ -230,7 +230,7 @@ public class ResponseMap extends HashMap<String,Object>{
     }
     */
 	/**
-	 * 多配置版本，检查xml串签名是否有效，有效返回true，无效返回false
+	 * 检查xml串签名是否有效，有效返回true，无效返回false
 	 * */
 	public boolean isSignatureValid() {
 		String signInResponse = getSign();
