@@ -36,7 +36,7 @@ public class JsPaySignature
 	private long timeStamp = 0L;
 	private String nonceStr = null;
 	private String prepay_id = null;
-	private String signType = "MD5";
+	private String signType = Signature.TYPE_MD5;
 	private String paySign = null;
 	
 	public JsPaySignature(String prepay_id) {
@@ -46,7 +46,7 @@ public class JsPaySignature
 		 //当前时间的秒数
 		timeStamp = System.currentTimeMillis() / 1000;
 		nonceStr=RandomStringGenerator.getRandomStringByLength(32);
-		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey());
+		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey(),signType, WxPayConfigsCache.getMchSecretKey());
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class JsPaySignature
 		this.nonceStr = nonceStr;
 		this.prepay_id = prepay_id;
 		appId=WxPayConfigsCache.getAppId();
-		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey());
+		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey(),signType, WxPayConfigsCache.getMchSecretKey());
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class JsPaySignature
 		 //当前时间的秒数
 		timeStamp = System.currentTimeMillis() / 1000;
 		nonceStr=RandomStringGenerator.getRandomStringByLength(32);
-		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey(indexKey));
+		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey(indexKey),signType, WxPayConfigsCache.getMchSecretKey());
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class JsPaySignature
 		this.nonceStr = nonceStr;
 		this.prepay_id = prepay_id;
 		appId=WxPayConfigsCache.getAppId(indexKey);
-		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey(indexKey));
+		paySign = Signature.getSign(toMap(),WxPayConfigsCache.getMchSecretKey(indexKey),signType, WxPayConfigsCache.getMchSecretKey());
 	}
 	
 	

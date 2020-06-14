@@ -50,6 +50,7 @@ public class WXPayManager {
 	public final static int TYPE_INDEX_REPORT=7;
 	public final static int TYPE_INDEX_MICROPAY=8;
 	public final static int TYPE_INDEX_TRANSFER=9;
+	public final static int TYPE_INDEX_PROFIT_SHARE=10;
 	
 	/**
 	 * 请求地址数组，添加新API时需要添加数组元素以及上面的索引，以及实现一个BaseReqData的子类并为其配置索引
@@ -65,6 +66,7 @@ public class WXPayManager {
 			"https://api.mch.weixin.qq.com/payitil/report",  // 7) 统计上报API
 			"https://api.mch.weixin.qq.com/pay/micropay", //8）被扫支付API
 			"https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers",// 9）企业付款
+			"https://api.mch.weixin.qq.com/secapi/pay/profitsharing", //10）分账
 	};
 	
 	/**
@@ -82,6 +84,7 @@ public class WXPayManager {
 			false,  // 7) 统计上报API
 			false, //8）被扫支付API
 			true,// 9）企业付款
+			true,// 10）分账
 	};
 
 	private static WXPayManager instance = new WXPayManager();

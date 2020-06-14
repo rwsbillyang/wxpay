@@ -148,7 +148,7 @@ public class ScanPayBusiness {
             //收到API的返回数据的时候得先验证一下数据有没有被第三方篡改，确保安全
             //--------------------------------------------------------------------
            // if (!Signature.checkIsSignValidFromResponseString(payServiceResponseString,WxPayConfigsCache.getMchSecretKey())) {
-            if(!scanPayResData.isSignatureValid()){
+            if(!scanPayResData.isSignatureValid(reportReqData.signType)){
                 log.error("【支付失败】支付请求API返回的数据签名验证失败，有可能数据被篡改了");
                 resultListener.onFailBySignInvalid(scanPayResData);
                 return;

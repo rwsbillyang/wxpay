@@ -7,13 +7,16 @@ import java.util.Map;
 
 
 public class Signature {
+	public final static String TYPE_HMAC_SHA256="HMAC-SHA256";
+	public final static String TYPE_MD5="MD5";
+	
     /**
      * 签名算法
      * @param o 要参与签名的数据对象
      * @return 签名
      * @throws IllegalAccessException
      */
-    public static String getSign(Object o,String key) throws IllegalAccessException {
+    public static String getSign(Object o,String key, String signType, String secret) throws IllegalAccessException {
         ArrayList<String> list = new ArrayList<String>();
         Class cls = o.getClass();
         Field[] fields = cls.getDeclaredFields();
@@ -33,12 +36,19 @@ public class Signature {
         String result = sb.toString();
         result += "key=" + key;
    
-        result = MD5.MD5Encode(result).toUpperCase();
+        if(TYPE_HMAC_SHA256.equals(signType))
+        {
+        	HMACSHA256.sha256_HMAC(result, secret);
+        }else
+        {
+        	result = MD5.MD5Encode(result);
+        }
+        
       
-        return result;
+        return result.toUpperCase();
     }
 
-    public static String getSign(Map<String,Object> map,String key){
+    public static String getSign(Map<String,Object> map,String key, String signType, String secret){
         ArrayList<String> list = new ArrayList<String>();
         for(Map.Entry<String,Object> entry:map.entrySet()){
             if(entry.getValue()!=""&&entry.getValue()!=null&&!entry.getKey().equals("sign")){
@@ -53,9 +63,18 @@ public class Signature {
             sb.append(arrayToSort[i]);
         }
         String result = sb.toString();
-        result += "key=" + key;     
-        result = MD5.MD5Encode(result).toUpperCase();
-        return result;
+        result += "key=" + key;   
+        
+        if(TYPE_HMAC_SHA256.equals(signType))
+        {
+        	HMACSHA256.sha256_HMAC(result, secret);
+        }else
+        {
+        	result = MD5.MD5Encode(result);
+        }
+        
+      
+        return result.toUpperCase();
     }
 
 

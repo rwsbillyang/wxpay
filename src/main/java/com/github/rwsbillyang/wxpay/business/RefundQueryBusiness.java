@@ -134,7 +134,7 @@ public class RefundQueryBusiness {
             //--------------------------------------------------------------------
             //收到API的返回数据的时候得先验证一下数据有没有被第三方篡改，确保安全
             //--------------------------------------------------------------------
-            if(!refundQueryResData.isSignatureValid()){
+            if(!refundQueryResData.isSignatureValid(reportReqData.signType)){
            // if (!Signature.checkIsSignValidFromResponseString(refundQueryServiceResponseString,WxPayConfigsCache.getMchSecretKey())) {
                 setResult("Case3:退款查询API返回的数据签名验证失败，有可能数据被篡改了");
                 resultListener.onFailBySignInvalid(refundQueryResData);

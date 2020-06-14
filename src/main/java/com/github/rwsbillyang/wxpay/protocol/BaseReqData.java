@@ -21,6 +21,8 @@ public abstract class BaseReqData extends HashMap<String,Object>{
     private boolean isTransfer = false;
 	private String APPID = "appid"; 
 	private String MCHID = "mch_id"; 
+	public String signType = Signature.TYPE_MD5;
+	
     public BaseReqData() {
 		super();
 	}
@@ -53,7 +55,7 @@ public abstract class BaseReqData extends HashMap<String,Object>{
     	this.put(APPID, WxPayConfigsCache.getAppId());
     	this.put(MCHID, WxPayConfigsCache.getMchId());
     	this.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
-		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey())) ;
+		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(),signType, WxPayConfigsCache.getMchSecretKey() )) ;
     }
 
 	/**
@@ -64,7 +66,7 @@ public abstract class BaseReqData extends HashMap<String,Object>{
     	this.put(APPID, WxPayConfigsCache.getAppId(indexKey));
     	this.put(MCHID, WxPayConfigsCache.getMchId(indexKey));
     	this.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
-		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(indexKey))) ;
+		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(indexKey),signType, WxPayConfigsCache.getMchSecretKey())) ;
     }
 
 
