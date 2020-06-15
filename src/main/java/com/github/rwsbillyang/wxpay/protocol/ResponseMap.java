@@ -239,7 +239,7 @@ public class ResponseMap extends HashMap<String,Object>{
 			return false;
 		}
 		String signForAPIResponse = Signature.getSign(this,
-				WxPayConfigsCache.getMchSecretKey(),signType, WxPayConfigsCache.getMchSecretKey());
+				WxPayConfigsCache.getMchSecretKey(),signType);
 		if (signForAPIResponse.equals(signInResponse))
 			return true;
 		else
@@ -256,7 +256,7 @@ public class ResponseMap extends HashMap<String,Object>{
 			return false;
 		}
 		String signForAPIResponse = Signature.getSign(this,
-				WxPayConfigsCache.getMchSecretKey(indexKey),signType, WxPayConfigsCache.getMchSecretKey());
+				WxPayConfigsCache.getMchSecretKey(indexKey),signType);
 		if (signForAPIResponse.equals(signInResponse))
 			return true;
 		else

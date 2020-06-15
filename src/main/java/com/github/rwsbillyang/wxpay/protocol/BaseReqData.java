@@ -55,7 +55,7 @@ public abstract class BaseReqData extends HashMap<String,Object>{
     	this.put(APPID, WxPayConfigsCache.getAppId());
     	this.put(MCHID, WxPayConfigsCache.getMchId());
     	this.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
-		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(),signType, WxPayConfigsCache.getMchSecretKey() )) ;
+		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(),signType )) ;
     }
 
 	/**
@@ -66,7 +66,7 @@ public abstract class BaseReqData extends HashMap<String,Object>{
     	this.put(APPID, WxPayConfigsCache.getAppId(indexKey));
     	this.put(MCHID, WxPayConfigsCache.getMchId(indexKey));
     	this.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
-		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(indexKey),signType, WxPayConfigsCache.getMchSecretKey())) ;
+		this.put("sign", Signature.getSign(this,WxPayConfigsCache.getMchSecretKey(indexKey),signType)) ;
     }
 
 

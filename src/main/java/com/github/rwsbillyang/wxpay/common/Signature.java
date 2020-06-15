@@ -16,7 +16,7 @@ public class Signature {
      * @return 签名
      * @throws IllegalAccessException
      */
-    public static String getSign(Object o,String key, String signType, String secret) throws IllegalAccessException {
+    public static String getSign(Object o,String secret, String signType) throws IllegalAccessException {
         ArrayList<String> list = new ArrayList<String>();
         Class cls = o.getClass();
         Field[] fields = cls.getDeclaredFields();
@@ -34,11 +34,11 @@ public class Signature {
             sb.append(arrayToSort[i]);
         }
         String result = sb.toString();
-        result += "key=" + key;
+        result += "key=" + secret;
    
         if(TYPE_HMAC_SHA256.equals(signType))
         {
-        	HMACSHA256.sha256_HMAC(result, secret);
+        	result = HMACSHA256.sha256_HMAC(result, secret);
         }else
         {
         	result = MD5.MD5Encode(result);
@@ -48,7 +48,7 @@ public class Signature {
         return result.toUpperCase();
     }
 
-    public static String getSign(Map<String,Object> map,String key, String signType, String secret){
+    public static String getSign(Map<String,Object> map,String secret, String signType){
         ArrayList<String> list = new ArrayList<String>();
         for(Map.Entry<String,Object> entry:map.entrySet()){
             if(entry.getValue()!=""&&entry.getValue()!=null&&!entry.getKey().equals("sign")){
@@ -63,11 +63,11 @@ public class Signature {
             sb.append(arrayToSort[i]);
         }
         String result = sb.toString();
-        result += "key=" + key;   
+        result += "key=" + secret;   
         
         if(TYPE_HMAC_SHA256.equals(signType))
         {
-        	HMACSHA256.sha256_HMAC(result, secret);
+        	result = HMACSHA256.sha256_HMAC(result, secret);
         }else
         {
         	result = MD5.MD5Encode(result);
