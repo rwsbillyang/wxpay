@@ -1,6 +1,5 @@
 package com.github.rwsbillyang.wxpay.protocol;
 
-import java.util.List;
 
 import com.github.rwsbillyang.wxpay.WXPayManager;
 
@@ -12,11 +11,14 @@ public class ProfitShareReqData  extends BaseReqData{
 		return WXPayManager.TYPE_INDEX_PROFIT_SHARE;
 	}
 
-	public ProfitShareReqData(String transaction_id, String out_order_no, List<ProfitShareReceiver> receivers) {
+	/**
+	 * @param receivers 不超过50个json对象，不能设置分账方作为分账接受方
+	 * */
+	public ProfitShareReqData(String transaction_id, String out_order_no, String receiverListJson) {
 		super();
 		this.put("transaction_id", transaction_id);
 		this.put("out_order_no", out_order_no);
-		this.put("receivers", receivers);
+		this.put("receivers", receiverListJson);
 	}
 
 	
